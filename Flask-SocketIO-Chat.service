@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve Flask-SocketIO-Chat
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/Flask-SocketIO-Chat
+Environment="PATH=/home/ubuntu/Flask-SocketIO-Chat.venv/bin"
+ExecStart=/home/ubuntu/Flask-SocketIO-Chat.venv/bin/uwsgi --ini Flask-SocketIO-Chat.ini
+
+[Install]
+WantedBy=multi-user.target
