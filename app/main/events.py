@@ -7,8 +7,10 @@ from .. import socketio
 def joined(message):
     """Sent by clients when they enter a room.
     A status message is broadcast to all people in the room."""
-    room = session.get('room') if 'room' in session else 'None'
-    name = session.get('name') if 'name' in session else 'None'
+    room = session.get('room') if 'room' in session else message['room'] if 'room' in message else 'None'
+    session['room'] = room
+    name = session.get('name') if 'name' in session else message['name'] if 'name' in message else 'None'
+    session['name'] = name
     join_room(room)
     emit('status', {'msg': name + ' has entered the room.'}, room=room)
 
