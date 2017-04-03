@@ -19,7 +19,8 @@ def text(message):
     The message is sent to all people in the room."""
     room = session.get('room') if 'room' in session else 'None'
     name = session.get('name') if 'name' in session else 'None'
-    emit('message', {'msg': name + ':' + message['msg']}, room=room)
+    msg = message['msg'] if isinstance(message, dict) else message
+    emit('message', {'msg': name + ':' + msg}, room=room)
 
 
 @socketio.on('left', namespace='/chat')
