@@ -21,7 +21,7 @@ def text(message):
     The message is sent to all people in the room."""
     room = session.get('room') if 'room' in session else 'None'
     name = session.get('name') if 'name' in session else 'None'
-    msg = message['msg'] if isinstance(message, dict) else message
+    msg = message['msg'] if 'msg' in message else message
     emit('message', {'msg': name + ':' + msg}, room=room)
 
 
