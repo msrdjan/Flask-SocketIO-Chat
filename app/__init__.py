@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_socketio import SocketIO
+from config.settings import SOCKET_MESSAGE_QUEUE
 
 # TODO: Check - Resolves "RuntimeError: Redis requires a monkey patched socket library to work with gevent"
 from gevent import monkey
@@ -18,5 +19,5 @@ def create_app(debug=False):
     app.register_blueprint(main_blueprint)
 
     # TODO: App instances connect to Redis server on one of the instances
-    socketio.init_app(app, message_queue='redis://')
+    socketio.init_app(app, message_queue=SOCKET_MESSAGE_QUEUE)
     return app
